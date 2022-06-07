@@ -3,7 +3,7 @@
 
 
 const initialState = {
-    loading : true
+    load : false
 }
 const authReducer = (state = initialState, action) => {
     switch (action.type) {

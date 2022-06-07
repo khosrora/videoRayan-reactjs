@@ -17,7 +17,7 @@ const Index = () => {
         <Router>
             <Routes>
                 <Route element={<LayoutAuth />} >
-                    <Route path='/login' element={<Login />} />
+                    <Route path='/' element={<Login />} />
                 </Route>
                 <Route element={<Layout />} >
                     <Route path='/profile' element={<Profile />} />

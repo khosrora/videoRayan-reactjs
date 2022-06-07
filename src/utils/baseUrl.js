@@ -1,0 +1,1 @@
+exports.server = "http://test.videorayan.com"
