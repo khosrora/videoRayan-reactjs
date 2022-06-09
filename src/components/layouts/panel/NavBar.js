@@ -1,8 +1,12 @@
-
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../../redux/actions/authAction';
 
 
 
 const NavBar = ({ setMenu, menu }) => {
+
+    const dispatch = useDispatch();
+
     return (
         <nav className="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
             <div className="container-fluid">
@@ -219,32 +223,8 @@ const NavBar = ({ setMenu, menu }) => {
                                         <span className="align-middle">پروفایل من</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <div className="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="pages-help-center-landing.html">
-                                        <i className="bx bx-support me-2"></i>
-                                        <span className="align-middle">راهنمایی</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="pages-faq.html">
-                                        <i className="bx bx-help-circle me-2"></i>
-                                        <span className="align-middle">سوالات متداول</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="pages-pricing.html">
-                                        <i className="bx bx-dollar me-2"></i>
-                                        <span className="align-middle">قیمت گذاری</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div className="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a className="dropdown-item" href="auth-login-cover.html" target="_blank">
+                                <li onClick={() => dispatch(logOut())} >
+                                    <a className="dropdown-item ">
                                         <i className="bx bx-power-off me-2"></i>
                                         <span className="align-middle">خروج</span>
                                     </a>

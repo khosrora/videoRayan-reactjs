@@ -1,13 +1,19 @@
-
+import { GLOBALTYPES } from './../actions/globalTypes';
 
 
 
 const initialState = {
-    login: true , 
-    user : {}
+    user: null , 
+    accessToken : null
 };
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GLOBALTYPES.USER :
+            return {
+                ...state , 
+               user : action.payload.data , 
+               accessToken : action.payload.access_token
+            }
         default:
             return state;
     }

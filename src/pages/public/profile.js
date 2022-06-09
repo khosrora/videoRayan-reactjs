@@ -1,8 +1,18 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import Moment from '../../utils/moment';
 
 
 
 
 const Profile = () => {
+
+    
+    const { auth } = useSelector(state => state);
+    const [user] = useState(auth.user)
+    console.log(user);
+
+
     return (
         <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -17,12 +27,11 @@ const Profile = () => {
                         <div class="flex-grow-1 mt-3 mt-sm-5">
                             <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                                 <div class="user-profile-info">
-                                    <h4>جان اسنو</h4>
+                                    <h4>{user.name}</h4>
                                     <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
-                                        <li class="list-inline-item fw-semibold"><i class="bx bx-pen"></i> طراح UX</li>
-                                        <li class="list-inline-item fw-semibold"><i class="bx bx-map"></i> شهر تبریز</li>
+                                        <li class="list-inline-item fw-semibold"><i class="bx bx-phone"></i> {user.name}</li>
                                         <li class="list-inline-item fw-semibold">
-                                            <i class="bx bx-calendar-alt"></i> عضویت در فروردین 1400
+                                            <i class="bx bx-calendar-alt"></i> عضویت در <Moment date={user.created_at} /> 
                                         </li>
                                     </ul>
                                 </div>

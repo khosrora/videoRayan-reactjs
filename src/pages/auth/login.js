@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/actions/authAction';
 
 const loginSchema = Yup.object().shape({
@@ -13,6 +13,8 @@ const loginSchema = Yup.object().shape({
 const Login = () => {
     const [see, setSee] = useState(false)
     const dispatch = useDispatch();
+
+    const { global } = useSelector(state => state);
 
     return (
         <div className="w-px-400 mx-auto">
@@ -42,9 +44,6 @@ const Login = () => {
                         <div className="mb-3 form-password-toggle">
                             <div className="d-flex justify-content-between">
                                 <label className="form-label" htmlFor="password">کلمه عبور</label>
-                                <a href="auth-forgot-password-cover.html">
-                                    <small>رمز عبور را فراموش کردید؟</small>
-                                </a>
                             </div>
                             <div className="input-group input-group-merge">
                                 <Field type={see ? "text" : "password"} className="form-control text-start" dir="ltr" name="password" placeholder="············" aria-describedby="password" />
@@ -52,7 +51,15 @@ const Login = () => {
                             </div>
                             {errors.password && touched.password ? <div className='text-danger text-sm'>{errors.password}</div> : null}
                         </div>
-                        <button type='submit' className="btn btn-secondary d-grid w-100 mt-4">ورود</button>
+                        <button type='submit' className="btn btn-secondary d-grid w-100 mt-4">
+                            {
+                                global.load 
+                                ?
+                                "لطفا منتظر باشید"
+                                :
+                                "ورود"
+                            }
+                        </button>
                     </Form>
                 )}
             </Formik>
