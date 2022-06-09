@@ -1,12 +1,12 @@
 export const sideBarConstans = [
     {
         icon: "menu-icon tf-icons bx bx-user",
-        route: "/",
+        route: "/profile",
         title: "پروفایل کاربری",
     },
     {
         icon: "menu-icon tf-icons bx bx-collection",
-        route: "/create-contact",
+        route: "/create-categories",
         title: "دسته بندی",
     },
     {

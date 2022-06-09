@@ -1,4 +1,6 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { logOut } from '../../../redux/actions/authAction';
 
 
@@ -6,6 +8,8 @@ import { logOut } from '../../../redux/actions/authAction';
 const NavBar = ({ setMenu, menu }) => {
 
     const dispatch = useDispatch();
+    const { auth } = useSelector(state => state);
+    const [user] = useState(auth.user)
 
     return (
         <nav className="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
@@ -20,7 +24,7 @@ const NavBar = ({ setMenu, menu }) => {
                     <div className="navbar-nav align-items-center">
                         <div className="nav-item navbar-search-wrapper mb-0">
                             <a className="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
-                                <span className="d-none d-md-inline-block text-muted">کاربر گرامی خوش آمدید</span>
+                                <span className="d-none d-md-inline-block text-muted">{user.name} عزیز خوش آمدید</span>
                             </a>
                         </div>
                     </div>

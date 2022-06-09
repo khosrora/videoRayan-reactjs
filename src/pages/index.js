@@ -16,6 +16,7 @@ import Layout from '../components/layouts/panel/Layout';
 // ! Pages
 import Login from "./auth/login";
 import Profile from './public/profile';
+import Categories from "./public/categories";
 
 
 const Index = () => {
@@ -49,9 +50,14 @@ const Index = () => {
                             element={<Navigate to="/" replace />}
                         />
                         :
-                        <Route element={<Layout />} >
-                            <Route path='/profile' element={<Profile />} />
-                        </Route>
+                        <>
+                            <Route element={<Layout />} >
+                                <Route path='/profile' element={<Profile />} />
+                            </Route>
+                            <Route element={<Layout />} >
+                                <Route path='/create-categories' element={<Categories />} />
+                            </Route>
+                        </>
                 }
             </Routes>
         </Router >
