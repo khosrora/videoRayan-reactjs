@@ -11,22 +11,17 @@ export const sideBarConstans = [
     },
     {
         icon: "menu-icon tf-icons bx bx-user-check",
-        route: "/create-contact",
+        route: "/create-contacts",
         title: "مخاطبین",
     },
     {
         icon: "menu-icon tf-icons bx bx-window-open",
-        route: "/create-contact",
+        route: "/create-meeting",
         title: "ایجاد جلسه",
     },
     {
         icon: "menu-icon tf-icons bx bx-spreadsheet",
-        route: "/create-contact",
+        route: "/meetings",
         title: "لیست جلسات",
-    },
-    {
-        icon: "menu-icon tf-icons bx bx-box",
-        route: "/create-contact",
-        title: "تاریخچه جلسات",
     },
 ]

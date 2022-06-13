@@ -1,48 +1,91 @@
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { editUserAction } from './../../redux/actions/userAction';
+
+const EditUserValidation = Yup.object().shape({
+    name: Yup.string().min(2, "نام انتخاب شده کوتاه است").max(100, "نام انتخاب شده بیش از حد بزرگ است").required("وارد کردن نام ضروری است"),
+    family: Yup.string().min(2, "نام خانوادگی انتخاب شده کوتاه است").max(100, "نام خانوادگی انتخاب شده بیش از حد بزرگ است").required("وارد کردن نام خانوادگی ضروری است"),
+    email: Yup.string().email("پست الکترونیک وارد شده معتبر نیست").required("وارد کردن پست الکترونیک ضروری است"),
+    phone: Yup.string().matches("^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}", "شماره همراه وارد شده نامعتبر است").required("وارد کردن شماره همراه ضروری است"),
+    password: Yup.string().min(6, "کلمه عبور خود را بیشتر از 6 کاراکتر انتخاب کنید").max(50, "کلمه عبور شما بیشتر از حد مجاز است").required("لطفا کلمه عبور خود را وارد کنید")
+});
 
 
 
+const EditUser = ({ user, setEdit }) => {
 
-const EditUser = ({ user , setEdit}) => {
+    const [see, setSee] = useState(false);
+    const dispatch = useDispatch();
+
     return (
-        <div class="card mb-4">
-            <h5 class="card-header">فرم ویرایش اطلاعات</h5>
-            <form class="card-body">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label" for="multicol-username">نام کاربری</label>
-                        <input type="text" id="multicol-username" class="form-control text-start" dir="ltr" placeholder={user.name} />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="multicol-email">ایمیل</label>
-                        <div class="input-group input-group-merge">
-                            <span class="input-group-text" id="multicol-email2" dir="ltr">@example.com</span>
-                            <input type="text" id="multicol-email" class="form-control text-start" dir="ltr" placeholder={user.email} aria-label="john.doe" aria-describedby="multicol-email2" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-password-toggle">
-                            <label class="form-label" for="multicol-password">شماره تماس</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="multicol-password" class="form-control text-start" dir="ltr" placeholder={user.phone} aria-describedby="multicol-password2" />
-                                <span class="input-group-text cursor-pointer" id="multicol-password2"><i class="bx bx-phone"></i></span>
+        <div className="card mb-4">
+            <h5 className="card-header">فرم ویرایش اطلاعات</h5>
+            <Formik
+                initialValues={{
+                    name: '',
+                    family: '',
+                    email: '',
+                    phone: '',
+                    password: '',
+                }}
+                validationSchema={EditUserValidation}
+                onSubmit={values => {
+                    dispatch(editUserAction(values));
+                }}
+            >
+                {({ errors, touched }) => (
+                    <Form className="card-body">
+                        <div className="row g-3">
+                            <div className="col-md-6">
+                                <label className="form-label" htmlFor="name">نام</label>
+                                <Field type="text" id="name" name='name' className="form-control text-start" dir="ltr" placeholder={user.name} />
+                                {errors.name && touched.name ? <span className='text-danger'>{errors.name}</span> : null}
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label" htmlFor="family">نام خانوادگی</label>
+                                <Field type="text" id="family" name='family' className="form-control text-start" dir="ltr" placeholder={user.family} />
+                                {errors.family && touched.family ? <span className='text-danger'>{errors.family}</span> : null}
+                            </div>
+                            <div className="col-md-12">
+                                <label className="form-label" htmlFor="email">پست الکترونیک</label>
+                                <div className="input-group input-group-merge">
+                                    <span className="input-group-text" id="email" dir="ltr">@example.com</span>
+                                    <Field type="text" id="email" name='email' className="form-control text-start" dir="ltr" placeholder={user.email} aria-label="john.doe" aria-describedby="multicol-email2" />
+                                </div>
+                                {errors.email && touched.email ? <span className='text-danger'>{errors.email}</span> : null}
+                            </div>
+                            <div className="col-md-6">
+                                <div className="form-password-toggle">
+                                    <label className="form-label" htmlFor="phone">شماره تماس</label>
+                                    <div className="input-group input-group-merge">
+                                        <Field type="tel" id="phone" name='phone' className="form-control text-start" dir="ltr" placeholder={user.phone} aria-describedby="multicol-password2" />
+                                        <span className="input-group-text cursor-pointer" id="phone"><i className="bx bx-phone"></i></span>
+                                    </div>
+                                    {errors.phone && touched.phone ? <span className='text-danger'>{errors.phone}</span> : null}
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="form-password-toggle">
+                                    <label className="form-label" htmlFor="password">رمز عبور</label>
+                                    <div className="input-group input-group-merge">
+                                        <Field type={see === true ? "text" : "password"} id="password" name="password" className="form-control text-start" dir="ltr" placeholder="············" aria-describedby="password" />
+                                        <span onClick={() => setSee(!see)} className="input-group-text cursor-pointer" id="password"><i className="bx bx-hide"></i></span>
+                                    </div>
+                                    {errors.password && touched.password ? <span className='text-danger'>{errors.password}</span> : null}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-password-toggle">
-                            <label class="form-label" for="multicol-confirm-password">رمز عبور</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="multicol-confirm-password" class="form-control text-start" dir="ltr" placeholder="············" aria-describedby="multicol-confirm-password2" />
-                                <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"><i class="bx bx-hide"></i></span>
-                            </div>
+                        <div className="pt-4">
+                            <button type="submit" className="btn btn-danger me-sm-3 me-1">
+                                ویرایش اطلاعات
+                            </button>
+                            <button onClick={() => setEdit(false)} type="reset" className="btn btn-label-secondary">انصراف</button>
                         </div>
-                    </div>
-                </div>
-                <div class="pt-4">
-                    <button type="submit" class="btn btn-danger me-sm-3 me-1">ویرایش اطلاعات</button>
-                    <button onClick={() => setEdit(false)} type="reset" class="btn btn-label-secondary">انصراف</button>
-                </div>
-            </form>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 }

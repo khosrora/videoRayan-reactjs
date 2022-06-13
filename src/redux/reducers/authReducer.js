@@ -12,7 +12,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state , 
                user : action.payload.data , 
-               accessToken : action.payload.access_token
+               accessToken : action.payload.accessToken
             }
         default:
             return state;

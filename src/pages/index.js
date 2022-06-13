@@ -17,6 +17,9 @@ import Layout from '../components/layouts/panel/Layout';
 import Login from "./auth/login";
 import Profile from './public/profile';
 import Categories from "./public/categories";
+import CreateContact from "./public/createContact";
+import Meetings from "./public/mettings";
+import CreateMeeting from "./public/createMeeting";
 
 
 const Index = () => {
@@ -56,6 +59,15 @@ const Index = () => {
                             </Route>
                             <Route element={<Layout />} >
                                 <Route path='/create-categories' element={<Categories />} />
+                            </Route>
+                            <Route element={<Layout />} >
+                                <Route path='/create-contacts' element={<CreateContact />} />
+                            </Route>
+                            <Route element={<Layout />} >
+                                <Route path='/meetings' element={<Meetings />} />
+                            </Route>
+                            <Route element={<Layout />} >
+                                <Route path='/create-meeting' element={<CreateMeeting />} />
                             </Route>
                         </>
                 }

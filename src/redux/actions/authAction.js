@@ -11,8 +11,9 @@ export const loginUser = data => async dispatch => {
         if (res.data.access_token) {
             successMessage("ورود موفقیت آمیز بود");
             Cookies.set('firstLogin', JSON.stringify(res.data.user));
+            Cookies.set('accToken', JSON.stringify(res.data.access_token));
         }
-        dispatch({ type: GLOBALTYPES.USER, payload: { data: res.data.user, access_token: res.data.access_token } })
+        dispatch({ type: GLOBALTYPES.USER, payload: { data: res.data.user, accessToken: res.data.access_token } })
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
     } catch (err) {
         if (err.response.status) errorMessage("لطفا ابتدا ثبت نام کنید");
@@ -21,29 +22,30 @@ export const loginUser = data => async dispatch => {
 }
 
 export const refreshUser = () => async dispatch => {
-    const user =  JSON.parse(Cookies.get("firstLogin"));
+    const user = JSON.parse(Cookies.get("firstLogin"));
+    const accessToken = JSON.parse(Cookies.get("accToken"));
     try {
-        if(user){
+        if (user) {
             dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
-            dispatch({ type: GLOBALTYPES.USER, payload: { data : user } })
+            dispatch({ type: GLOBALTYPES.USER, payload: { data: user, accessToken } })
             dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
         }
     } catch (err) {
         if (err.response.status) errorMessage("لطفا ابتدا وارد وب سایت شوید");
-        dispatch({ type: GLOBALTYPES.USER, payload: { data : null } })
+        dispatch({ type: GLOBALTYPES.USER, payload: { data: null } })
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
     }
 }
 
-export const logOut= () => dispatch => {
+export const logOut = () => dispatch => {
     try {
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
         Cookies.remove('firstLogin');
-        dispatch({ type: GLOBALTYPES.USER, payload: { data : null } });
+        Cookies.remove('accToken');
+        dispatch({ type: GLOBALTYPES.USER, payload: { data: null } });
         errorMessage("عملیات خروج انجام شد");
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
     } catch (err) {
-        console.log(err);
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
     }
 }
