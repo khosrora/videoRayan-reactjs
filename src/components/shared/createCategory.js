@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { createCategory } from '../../../redux/actions/categories';
+import { createCategory } from '../../redux/actions/categories';
 
 
 const createCategoryValidation = Yup.object().shape({

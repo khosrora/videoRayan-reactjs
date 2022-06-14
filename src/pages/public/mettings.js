@@ -35,7 +35,7 @@ const Meetings = () => {
                                     <td><i className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i> <strong>جلسه اول</strong></td>
                                     <td><span className="badge bg-label-danger">1 / 4 / 1400</span></td>
                                     <td><span className="badge bg-label-success">لیست انتظار</span></td>
-                                    <td><span className="badge bg-label-warning me-1 cursor-pointer">ویرایش</span></td>
+                                    <td><span className="badge bg-label-warning me-1 cursor-pointer">افزودن مخاطب</span></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import CartCategories from '../../components/layouts/panel/Categories';
-import CreateCategory from '../../components/layouts/panel/createCategory';
+import CartCategories from '../../components/shared/Categories';
+import CreateCategory from '../../components/shared/createCategory';
 
 
 

@@ -56,17 +56,9 @@ const Index = () => {
                         <>
                             <Route element={<Layout />} >
                                 <Route path='/profile' element={<Profile />} />
-                            </Route>
-                            <Route element={<Layout />} >
                                 <Route path='/create-categories' element={<Categories />} />
-                            </Route>
-                            <Route element={<Layout />} >
                                 <Route path='/create-contacts' element={<CreateContact />} />
-                            </Route>
-                            <Route element={<Layout />} >
                                 <Route path='/meetings' element={<Meetings />} />
-                            </Route>
-                            <Route element={<Layout />} >
                                 <Route path='/create-meeting' element={<CreateMeeting />} />
                             </Route>
                         </>
