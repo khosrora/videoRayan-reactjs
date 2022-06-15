@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CardsProfile from '../../components/shared/CardsProfile';
 import EditUser from '../../components/shared/EditUser';
+import ResetPassword from '../../components/shared/resetPassword';
 import Moment from '../../utils/moment';
 
 
@@ -12,12 +13,12 @@ const Profile = () => {
 
     const { auth } = useSelector(state => state);
     const [user] = useState(auth.user)
-    const [edit, setEdit] = useState(false)
+    const [changePass, setChangePass] = useState(false)
 
     return (
         <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="card mb-4">
+                <div class="card">
                     <div class="user-profile-header-banner">
                         <img src="../../assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top" />
                     </div>
@@ -36,14 +37,12 @@ const Profile = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <p onClick={() => setEdit(!edit)} class="btn btn-danger text-nowrap">
+                                <p onClick={() => setChangePass(!changePass)} class="btn btn-secondary text-nowrap">
                                     <i class="bx bx-user-check"></i>
                                     {
-                                        edit
-                                            ?
-                                            "اطلاعات کاربری"
-                                            :
-                                            "ویرایش اطلاعات"
+                                        !changePass 
+                                        ?
+                                        "تغییر کلمه عبور" : "انصراف"
                                     }
                                 </p>
                             </div>
@@ -53,13 +52,13 @@ const Profile = () => {
             </div>
             <div class="row g-4 mb-4 container m-auto">
                 {
-                    edit
+                    changePass
                         ?
-                        <EditUser user={user} setEdit={setEdit} />
-                        :
-                        <CardsProfile />
+                        <ResetPassword />
+                        : null
                 }
-
+                <CardsProfile />
+                <EditUser user={user} />
             </div>
         </div>
     );

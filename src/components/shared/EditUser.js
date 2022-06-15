@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { editUserAction } from './../../redux/actions/userAction';
@@ -9,14 +8,12 @@ const EditUserValidation = Yup.object().shape({
     family: Yup.string().min(2, "نام خانوادگی انتخاب شده کوتاه است").max(100, "نام خانوادگی انتخاب شده بیش از حد بزرگ است").required("وارد کردن نام خانوادگی ضروری است"),
     email: Yup.string().email("پست الکترونیک وارد شده معتبر نیست").required("وارد کردن پست الکترونیک ضروری است"),
     phone: Yup.string().matches("^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}", "شماره همراه وارد شده نامعتبر است").required("وارد کردن شماره همراه ضروری است"),
-    password: Yup.string().min(6, "کلمه عبور خود را بیشتر از 6 کاراکتر انتخاب کنید").max(50, "کلمه عبور شما بیشتر از حد مجاز است").required("لطفا کلمه عبور خود را وارد کنید")
 });
 
 
 
-const EditUser = ({ user, setEdit }) => {
+const EditUser = ({ user }) => {
 
-    const [see, setSee] = useState(false);
     const dispatch = useDispatch();
 
     return (
@@ -28,7 +25,6 @@ const EditUser = ({ user, setEdit }) => {
                     family: '',
                     email: '',
                     phone: '',
-                    password: '',
                 }}
                 validationSchema={EditUserValidation}
                 onSubmit={values => {
@@ -48,7 +44,7 @@ const EditUser = ({ user, setEdit }) => {
                                 <Field type="text" id="family" name='family' className="form-control text-start" dir="ltr" placeholder={user.family} />
                                 {errors.family && touched.family ? <span className='text-danger'>{errors.family}</span> : null}
                             </div>
-                            <div className="col-md-12">
+                            <div className="col-md-6">
                                 <label className="form-label" htmlFor="email">پست الکترونیک</label>
                                 <div className="input-group input-group-merge">
                                     <span className="input-group-text" id="email" dir="ltr">@example.com</span>
@@ -66,22 +62,11 @@ const EditUser = ({ user, setEdit }) => {
                                     {errors.phone && touched.phone ? <span className='text-danger'>{errors.phone}</span> : null}
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="form-password-toggle">
-                                    <label className="form-label" htmlFor="password">رمز عبور</label>
-                                    <div className="input-group input-group-merge">
-                                        <Field type={see === true ? "text" : "password"} id="password" name="password" className="form-control text-start" dir="ltr" placeholder="············" aria-describedby="password" />
-                                        <span onClick={() => setSee(!see)} className="input-group-text cursor-pointer" id="password"><i className="bx bx-hide"></i></span>
-                                    </div>
-                                    {errors.password && touched.password ? <span className='text-danger'>{errors.password}</span> : null}
-                                </div>
-                            </div>
                         </div>
                         <div className="pt-4">
-                            <button type="submit" className="btn btn-danger me-sm-3 me-1">
+                            <button type="submit" className="btn btn-secondary me-sm-3 me-1">
                                 ویرایش اطلاعات
                             </button>
-                            <button onClick={() => setEdit(false)} type="reset" className="btn btn-label-secondary">انصراف</button>
                         </div>
                     </Form>
                 )}

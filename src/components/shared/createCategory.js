@@ -5,7 +5,8 @@ import { createCategory } from '../../redux/actions/categories';
 
 
 const createCategoryValidation = Yup.object().shape({
-    name: Yup.string().required("وارد کردن فیلد نام دسته بندی ضروری است")
+    name: Yup.string().required("وارد کردن فیلد نام دسته بندی ضروری است"),
+    desc: Yup.string().min(5, "توضیحات را بین 5 و 50 کاراکتر در نظر بگیرید").max(50, "توضیحات را بین 5 و 50 کاراکتر در نظر بگیرید").required("لطفا توضیحات دسته بندی را وارد کنید")
 });
 
 
@@ -17,20 +18,28 @@ const CreateCategory = () => {
         <Formik
             initialValues={{
                 name: '',
+                desc: ''
             }}
             validationSchema={createCategoryValidation}
             onSubmit={values => {
+                console.log(values);
                 dispatch(createCategory(values));
             }}
         >
             {({ errors, touched }) => (
-                <Form class="card mb-2">
-                    <h5 class="card-header">ایجاد دسته بندی جدید</h5>
-                    <div class="card-body">
-                        <div>
-                            <Field type="text" class="form-control" id="name" name="name" placeholder="نام دسته بندی" aria-describedby="defaultFormControlHelp" />
+                <Form className="card mb-2">
+                    <h5 className="card-header">ایجاد دسته بندی جدید</h5>
+                    <div className="card-body row">
+                        <div className='col-6'>
+                            <label htmlFor="name">نام دسته بندی</label>
+                            <Field type="text" className="form-control mt-2" id="name" name="name" aria-describedby="defaultFormControlHelp" />
                             {errors.name && touched.name ? <span className='text-danger'>{errors.name}</span> : null} <br />
-                            <button type="submit" className="btn btn-danger mt-2">ثبت دسته بندی جدید</button>
+                            <button type="submit" className="btn btn-secondary mt-2">ثبت دسته بندی جدید</button>
+                        </div>
+                        <div className='col-6'>
+                            <label htmlFor="desc">توضیحات دسته بندی</label>
+                            <Field type="text" className="form-control mt-2" id="desc" name="desc" aria-describedby="defaultFormControlHelp" />
+                            {errors.desc && touched.desc ? <span className='text-danger'>{errors.desc}</span> : null} <br />
                         </div>
                     </div>
                 </Form>
