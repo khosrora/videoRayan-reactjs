@@ -1,8 +1,9 @@
-
+import { Link } from 'react-router-dom';
 
 
 
 const Meetings = () => {
+
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
@@ -46,7 +47,7 @@ const Meetings = () => {
                                     <td><span className="badge bg-label-secondary">لیست انتظار</span></td>
                                     <td>
                                         <i className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
-                                        <span className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</span>
+                                        <Link to={`/add-users-meet/${"1"}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
                                     </td>
                                 </tr>
                                 <tr>
@@ -55,7 +56,7 @@ const Meetings = () => {
                                     <td><span className="badge bg-label-secondary">لیست انتظار</span></td>
                                     <td>
                                         <i className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
-                                        <span className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</span>
+                                        <Link to={`/add-users-meet/${"1"}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
                                     </td>
                                 </tr>
                                 <tr>
@@ -64,7 +65,7 @@ const Meetings = () => {
                                     <td><span className="badge bg-label-secondary">لیست انتظار</span></td>
                                     <td>
                                         <i className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
-                                        <span className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</span>
+                                        <Link to={`/add-users-meet/${"1"}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
                                     </td>
                                 </tr>
                                 <tr>
@@ -73,18 +74,10 @@ const Meetings = () => {
                                     <td><span className="badge bg-label-secondary">لیست انتظار</span></td>
                                     <td>
                                         <i className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
-                                        <span className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</span>
+                                        <Link to={`/add-users-meet/${"1"}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><strong>جلسه اول</strong></td>
-                                    <td><span className="badge bg-label-secondary">1 / 4 / 1400</span></td>
-                                    <td><span className="badge bg-label-secondary">لیست انتظار</span></td>
-                                    <td>
-                                        <i className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
-                                        <span className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</span>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

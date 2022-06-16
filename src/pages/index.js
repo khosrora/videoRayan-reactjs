@@ -20,6 +20,7 @@ import Categories from "./public/categories";
 import CreateContact from "./public/createContact";
 import Meetings from "./public/mettings";
 import CreateMeeting from "./public/createMeeting";
+import AddUsersMeet from "./public/addUsersMeet";
 
 
 const Index = () => {
@@ -60,6 +61,7 @@ const Index = () => {
                                 <Route path='/create-contacts' element={<CreateContact />} />
                                 <Route path='/meetings' element={<Meetings />} />
                                 <Route path='/create-meeting' element={<CreateMeeting />} />
+                                <Route path='/add-users-meet/:id' element={<AddUsersMeet />} />
                             </Route>
                         </>
                 }
