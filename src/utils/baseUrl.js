@@ -1,1 +1,1 @@
-exports.server = "https://test.videorayan.com"
+exports.server = "https://videorayan.com"

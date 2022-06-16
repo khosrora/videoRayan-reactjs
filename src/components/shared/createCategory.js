@@ -22,7 +22,6 @@ const CreateCategory = () => {
             }}
             validationSchema={createCategoryValidation}
             onSubmit={values => {
-                console.log(values);
                 dispatch(createCategory(values));
             }}
         >

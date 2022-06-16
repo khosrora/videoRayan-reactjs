@@ -53,6 +53,42 @@ const AddUsersMeet = () => {
                                     <td><span className="badge bg-label-secondary">برنامه نویس</span></td>
                                     <td><input className="form-check-input" type="radio" value="" /></td>
                                 </tr>
+                                <tr>
+                                    <td><input className="form-check-input" type="checkbox" value="" /></td>
+                                    <td><span>خسرو رسولی</span></td>
+                                    <td><span className="badge bg-label-secondary">09332839823</span></td>
+                                    <td><span className="badge bg-label-secondary">برنامه نویس</span></td>
+                                    <td><input className="form-check-input" type="radio" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input className="form-check-input" type="checkbox" value="" /></td>
+                                    <td><span>خسرو رسولی</span></td>
+                                    <td><span className="badge bg-label-secondary">09332839823</span></td>
+                                    <td><span className="badge bg-label-secondary">برنامه نویس</span></td>
+                                    <td><input className="form-check-input" type="radio" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input className="form-check-input" type="checkbox" value="" /></td>
+                                    <td><span>خسرو رسولی</span></td>
+                                    <td><span className="badge bg-label-secondary">09332839823</span></td>
+                                    <td><span className="badge bg-label-secondary">برنامه نویس</span></td>
+                                    <td><input className="form-check-input" type="radio" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input className="form-check-input" type="checkbox" value="" /></td>
+                                    <td><span>خسرو رسولی</span></td>
+                                    <td><span className="badge bg-label-secondary">09332839823</span></td>
+                                    <td><span className="badge bg-label-secondary">برنامه نویس</span></td>
+                                    <td><input className="form-check-input" type="radio" value="" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input className="form-check-input" type="checkbox" value="" /></td>
+                                    <td><span>خسرو رسولی</span></td>
+                                    <td><span className="badge bg-label-secondary">09332839823</span></td>
+                                    <td><span className="badge bg-label-secondary">برنامه نویس</span></td>
+                                    <td><input className="form-check-input" type="radio" value="" /></td>
+                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

@@ -11,7 +11,7 @@ export const loginUser = data => async dispatch => {
         if (res.data.access_token) {
             successMessage("ورود موفقیت آمیز بود");
             Cookies.set('firstLogin', JSON.stringify(res.data.user));
-            Cookies.set('accToken', JSON.stringify(res.data.access_token));
+            Cookies.set('accToken', res.data.access_token);
         }
         dispatch({ type: GLOBALTYPES.USER, payload: { data: res.data.user, accessToken: res.data.access_token } })
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
@@ -23,7 +23,7 @@ export const loginUser = data => async dispatch => {
 
 export const refreshUser = () => async dispatch => {
     const user = JSON.parse(Cookies.get("firstLogin"));
-    const accessToken = JSON.parse(Cookies.get("accToken"));
+    const accessToken = Cookies.get("accToken");
     try {
         if (user) {
             dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });

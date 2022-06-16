@@ -1,11 +1,14 @@
 import axios from "axios";
 import { server } from "./baseUrl"
+import Cookies from 'js-cookie'
+
+export const tokenUser = Cookies.get('accToken');
 
 
 export const getDataAPI = async (url, token) => {
     const res = await axios.get(`${server}/api/${url}`, {
         headers: {
-            Authorization: token
+            Authorization:  token
         }
     })
     return res;

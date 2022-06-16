@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import CartCategories from '../../components/shared/Categories';
 import CreateCategory from '../../components/shared/createCategory';
+import { getCategories } from '../../redux/actions/categories';
 
 
 
 const Categories = () => {
 
     const [create, setCreate] = useState(false)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [])
 
     return (
         <div class="content-wrapper">
@@ -48,10 +55,7 @@ const Categories = () => {
                             </div>
                     }
                     <CartCategories />
-                    <CartCategories />
-                    <CartCategories />
-                    <CartCategories />
-                    <CartCategories />
+                 
                 </div>
             </div>
         </div>
