@@ -4,7 +4,8 @@ import { GLOBALTYPES } from "../actions/globalTypes";
 
 
 const initialState = {
-    load: false
+    load: false , 
+    loadCategory : false
 }
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -12,6 +13,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 load: action.payload.load
+        }
+        case GLOBALTYPES.LOAD_CATEGORIES:
+            return {
+                ...state,
+                loadCategory: action.payload.load
         }
         default:
             return state;

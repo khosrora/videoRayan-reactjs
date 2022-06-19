@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import CartCategories from '../../components/shared/Categories';
-import CreateCategory from '../../components/shared/createCategory';
-import { getCategories } from '../../redux/actions/categories';
+import CartCategories from '../../components/shared/categories/CartCategories';
+import CreateCategory from '../../components/shared/categories/createCategory';
+import EditCategory from '../../components/shared/categories/editCategory';
+import SearchCategories from '../../components/shared/categories/SearchCategories';
+import { getCategories } from '../../redux/actions/categoriesAction';
 
 
 
 const Categories = () => {
 
-    const [create, setCreate] = useState(false)
+    const [edit, setEdit] = useState(false);
+    const [filter, setFilter] = useState("");
+    const [dataEdit, setDataEdit] = useState(false);
+
+    const [create, setCreate] = useState(false);
+    const { global } = useSelector(state => state)
+
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,21 +34,18 @@ const Categories = () => {
                             ?
                             <CreateCategory />
                             :
-                            <div class="card mb-2">
-                                <h5 class="card-header">جست و جو در بین دسته بندی ها</h5>
-                                <div class="card-body">
-                                    <div>
-                                        <input type="text" class="form-control" id="defaultFormControlInput" placeholder="نام دسته بندی" aria-describedby="defaultFormControlHelp" />
-                                        <div id="defaultFormControlHelp" class="form-text">
-                                            این اطلاعات بین دسته بندی هایی که شما ثبت کرده اید دریافت میشود
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <SearchCategories setFilter={setFilter} />
+                    }
+                    {
+                        edit
+                            ?
+                            <EditCategory dataEdit={dataEdit} setEdit={setEdit} />
+                            :
+                            null
                     }
                 </div>
                 <div className="flex row m-auto">
+
                     {
                         create
                             ?
@@ -54,8 +61,18 @@ const Categories = () => {
                                 <p>دسته بندی جدید اضافه کنید</p>
                             </div>
                     }
-                    <CartCategories />
-                 
+                    {
+                        global.loadCategory ?
+                            <div onClick={() => setCreate(!create)} class="cursor-pointer card col-sm-6 col-xl-3 my-2 d-flex justify-content-center align-items-center border rounded">
+                                <div class="spinner-grow m-4" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <br />
+                                <p>در حال دریافت اطلاعات</p>
+                            </div>
+                            :
+                            <CartCategories setEdit={setEdit} setDataEdit={setDataEdit} filter={filter} />
+                    }
                 </div>
             </div>
         </div>
