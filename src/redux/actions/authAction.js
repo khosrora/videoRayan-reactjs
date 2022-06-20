@@ -4,6 +4,19 @@ import { GLOBALTYPES } from './globalTypes';
 import Cookies from 'js-cookie';
 
 
+export const registerUser = data => async dispatch => {
+    try {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
+        const res = await postDataAPI("auth/register", data);
+        console.log(res);
+        if (res.status === 201) successMessage("ثبت نام موفقیت آمیز بود");
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+    } catch (err) {
+        if (err) errorMessage("لطفا دوباره امتحان کنید");
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+    }
+}
+
 export const loginUser = data => async dispatch => {
     try {
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
@@ -16,6 +29,7 @@ export const loginUser = data => async dispatch => {
         dispatch({ type: GLOBALTYPES.USER, payload: { data: res.data.user, accessToken: res.data.access_token } })
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
     } catch (err) {
+        console.log(err);
         if (err.response.status) errorMessage("لطفا ابتدا ثبت نام کنید");
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
     }

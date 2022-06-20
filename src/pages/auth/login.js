@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/actions/authAction';
+import { Link } from 'react-router-dom';
 
 const loginSchema = Yup.object().shape({
     email: Yup.string().email('پست الکترونیک شما معتبر نیست').required('وارد کردن پست الکترونیک ضروری است'),
@@ -53,16 +54,19 @@ const Login = () => {
                         </div>
                         <button type='submit' className="btn btn-secondary d-grid w-100 mt-4">
                             {
-                                global.load 
-                                ?
-                                "لطفا منتظر باشید"
-                                :
-                                "ورود"
+                                global.load
+                                    ?
+                                    "لطفا منتظر باشید"
+                                    :
+                                    "ورود"
                             }
                         </button>
                     </Form>
                 )}
             </Formik>
+            <Link to="/register">
+                <span>برای ثبت نام از اینجا اقدام کنید</span>
+            </Link>
         </div>
     );
 }

@@ -15,12 +15,13 @@ import Layout from '../components/layouts/panel/Layout';
 
 // ! Pages
 import Login from "./auth/login";
+import Register from "./auth/register";
 import Profile from './public/profile';
 import Categories from "./public/categories";
-import CreateContact from "./public/createContact";
 import Meetings from "./public/mettings";
 import CreateMeeting from "./public/createMeeting";
 import AddUsersMeet from "./public/addUsersMeet";
+import Contacts from "./public/Contacts";
 
 
 const Index = () => {
@@ -39,6 +40,7 @@ const Index = () => {
                         ?
                         <Route element={<LayoutAuth />} >
                             <Route path='/' element={<Login />} />
+                            <Route path='/register' element={<Register />} />
                         </Route>
                         :
                         <Route
@@ -58,7 +60,7 @@ const Index = () => {
                             <Route element={<Layout />} >
                                 <Route path='/profile' element={<Profile />} />
                                 <Route path='/create-categories' element={<Categories />} />
-                                <Route path='/create-contacts' element={<CreateContact />} />
+                                <Route path='/create-contacts' element={<Contacts />} />
                                 <Route path='/meetings' element={<Meetings />} />
                                 <Route path='/create-meeting' element={<CreateMeeting />} />
                                 <Route path='/add-users-meet/:id' element={<AddUsersMeet />} />
