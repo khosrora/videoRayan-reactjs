@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { addContact } from '../../../redux/actions/contactAction';
-import { getCategories } from '../../../redux/actions/categoriesAction';
+import { editUserContact } from "./../../../redux/actions/contactAction"
 import Swal from 'sweetalert2';
 
-const createUserValidation = Yup.object().shape({
+const editUserValidation = Yup.object().shape({
     username: Yup.string().min(2, "نام کاربری بیش از حد کوتاه است").max(50, "نام کاربری بیش از حد بزرگ است").required("وارد کردن این فیلد الزامی است"),
     phone: Yup.string().required("وارد کردن این فیلد الزامی است").max(11, "شماره تماس وارد شده بیش از حد مجاز است").matches("09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}", "شماره تماس وارد شده معتبر نیست"),
     semat: Yup.string().min(2, "سمت مخاطب نباید کمتر از 2 کاراکتر باشد").max(50, "سمت کاربر نباید بیشتر از 50 کاراکتر باشد").required("وارد کردن این فیلد الزامی است"),
@@ -14,43 +13,44 @@ const createUserValidation = Yup.object().shape({
 
 
 
-const CreateUser = () => {
-
+const EditUser = ({ editUser, setEditUser }) => {
     const [select, setSelect] = useState("");
     const { categories } = useSelector(state => state);
     const dispatch = useDispatch();
     const categoryData = categories.allCategories;
 
 
-    useEffect(() => {
-        dispatch(getCategories());
-    }, []);
-
     return (
         <div className="card mb-2">
-            <h5 className="card-header">ایجاد مخاطب جدید</h5>
+            <div className="d-flex justify-content-between align-items-center">
+                <h5 className="card-header">ویرایش مخاطب</h5>
+                <h5 className='text-danger m-4 cursor-pointer' onClick={() => setEditUser(null)}>بازگشت از ویرایش</h5>
+            </div>
             <div className="card-body">
                 <Formik
                     initialValues={{
                         username: "",
                         phone: "",
                         semat: "",
+                        id: ""
                     }}
-                    validationSchema={createUserValidation}
+                    validationSchema={editUserValidation}
                     onSubmit={values => {
                         Swal.fire({
                             title: 'آیا مطمئن هستید ؟',
-                            text: "بعد از اضافه کردن کاربر میتوانید حذف و ویرایش کنید",
+                            text: "بعد از ویرایش کاربر میتوانید حذف و ویرایش کنید",
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'بله اضافه کن',
+                            confirmButtonText: 'بله ویرایش کن',
                             cancelButtonText: 'منصرف شدم'
                         }).then(async (result) => {
                             if (result.isConfirmed) {
                                 values.ca_id = select;
-                                dispatch(addContact(values))
+                                values.id = editUser.id;
+                                dispatch(editUserContact(values))
+                                setEditUser(null)
                             }
                         });
                     }}
@@ -59,17 +59,17 @@ const CreateUser = () => {
                         <Form className="row">
                             <div className="col-xs-12  col-md-6 my-2">
                                 <label htmlFor="name">نام و نام خانوادگی</label>
-                                <Field type="text" name="username" className="form-control mt-2" placeholder="" />
+                                <Field type="text" name="username" className="form-control mt-2" placeholder={editUser.username} />
                                 {errors.username && touched.username ? <span className='text-danger'>{errors.username}</span> : null}
                             </div>
                             <div className="col-xs-12  col-md-6 my-2">
                                 <label htmlFor="phone">شماره تماس</label>
-                                <Field type="text" name="phone" className="form-control mt-2" placeholder="" />
+                                <Field type="text" name="phone" className="form-control mt-2" placeholder={editUser.phone} />
                                 {errors.phone && touched.phone ? <span className='text-danger'>{errors.phone}</span> : null}
                             </div>
                             <div className="col-xs-12  col-md-6 my-2">
                                 <label htmlFor="semat">سمت</label>
-                                <Field type="text" name="semat" className="form-control mt-2" placeholder="" />
+                                <Field type="text" name="semat" className="form-control mt-2" placeholder={editUser.semat} />
                                 {errors.semat && touched.semat ? <span className='text-danger'>{errors.semat}</span> : null}
                             </div>
                             <div className="col-xs-12  col-md-6 my-2">
@@ -89,7 +89,7 @@ const CreateUser = () => {
                                 </div>
                             </div>
                             <div className="">
-                                <button type='submit' className="btn btn-secondary mt-2" disabled={select === "" ? true : false}>ایجاد مخاطب</button>
+                                <button type='submit' className="btn btn-secondary mt-2 m-2" disabled={select === "" ? true : false}>ویرایش مخاطب</button>
                             </div>
                         </Form>
                     )}
@@ -99,4 +99,4 @@ const CreateUser = () => {
     );
 }
 
-export default CreateUser;
+export default EditUser;

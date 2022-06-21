@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CartCategories from '../../components/shared/categories/CartCategories';
 import CreateCategory from '../../components/shared/categories/createCategory';
 import EditCategory from '../../components/shared/categories/editCategory';
@@ -16,14 +15,13 @@ const Categories = () => {
     const [dataEdit, setDataEdit] = useState(false);
 
     const [create, setCreate] = useState(false);
-    const { global } = useSelector(state => state)
-
+    const { global } = useSelector(state => state);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getCategories())
-    }, [])
+        dispatch(getCategories());
+    }, []);
 
     return (
         <div class="content-wrapper">

@@ -38,7 +38,7 @@ export const deleteCategory = id => async dispatch => {
         const res = await deleteDataAPI(`auth/categories/${id}`, token);
         if (res.status === 200) {
             successMessage(res.data);
-            dispatch({ type: GLOBALTYPES.DELETE_CATEGORY, payload: { id } })
+            dispatch({ type: GLOBALTYPES.DELETE_CATEGORY, payload: { id } });
         }
         dispatch({ type: GLOBALTYPES.LOAD_CATEGORIES, payload: { load: false } });
     } catch (err) {
@@ -50,7 +50,6 @@ export const editCategory = data => async dispatch => {
     try {
         dispatch({ type: GLOBALTYPES.LOAD_CATEGORIES, payload: { load: true } });
         const res = await putDataAPI(`auth/categories/${data.id}`, { name: data.name }, token);
-        console.log(res);
         if (res.status === 200) {
             successMessage(res.data[0]);
         }

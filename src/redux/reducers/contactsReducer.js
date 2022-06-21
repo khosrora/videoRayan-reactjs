@@ -1,4 +1,4 @@
-import { GLOBALTYPES } from "../actions/globalTypes";
+import { DeleteData, EditData, GLOBALTYPES } from "../actions/globalTypes";
 
 
 
@@ -19,6 +19,16 @@ const contactsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allContacts: [action.payload.contacts, ...state.allContacts]
+            }
+        case GLOBALTYPES.DELETE_CONTACTS:
+            return {
+                ...state,
+                allContacts: DeleteData(state.allContacts, action.payload.id)
+            }
+        case GLOBALTYPES.EDIT_CONTACTS:
+            return {
+                ...state,
+                allContacts: EditData(state.allContacts, action.payload.id, action.payload.contacts)
             }
         default:
             return state;

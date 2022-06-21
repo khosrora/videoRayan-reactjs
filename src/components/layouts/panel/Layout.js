@@ -5,9 +5,10 @@ import SideBar from "./SideBar";
 
 
 
-const Layout = ({ children }) => {
+const Layout = () => {
 
     const [menu, setMenu] = useState(true);
+
     const displayWidth = window.innerWidth;
     useEffect(() => {
         if (displayWidth <= 1192) {
