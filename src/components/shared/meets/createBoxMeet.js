@@ -1,27 +1,51 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 // ! imports
 import DatePicker from "react-multi-date-picker"
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import "react-multi-date-picker/styles/layouts/mobile.css"
+import weekends from "react-multi-date-picker/plugins/highlight_weekends"
+import DatePickerHeader from "react-multi-date-picker/plugins/date_picker_header"
+import { createMeet } from "../../../redux/actions/meetAction";
+import Swal from 'sweetalert2';
 
 
-
-const CreateBoxMeet = ({ meet }) => {
+const CreateBoxMeet = () => {
 
     const [title, setTitle] = useState();
     const [date, setDate] = useState();
     const [time, setTime] = useState();
 
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
-        console.log(date);
-        console.log(time);
-        navigate('/meetings');
+        Swal.fire({
+            title: 'آیا مطمئن هستید ؟',
+            text: "بعد از اضافه کردن جلسه میتوانید حذف و ویرایش کنید",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'بله اضافه کن',
+            cancelButtonText: 'منصرف شدم'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let data = {
+                    name: title,
+                    start_time: `${time.toDate().getHours()}:${time.toDate().getMinutes()}`,
+                    start_date: date.toDate().toLocaleDateString('fa-IR'),
+                    session_type: 1
+                }
+                dispatch(createMeet(data));
+                navigate('/meetings');
+            }
+        });
     }
 
     return (
@@ -30,7 +54,7 @@ const CreateBoxMeet = ({ meet }) => {
                 <div className="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="text-center zindex-1 m-auto mb-0">
-                            جلسه شما به صورت ( {meet} ) ثبت خواهد شد
+                            جلسه شما به صورت ( کنفرانس ) ثبت خواهد شد
                         </h5>
                     </div>
                     <div class="card-body">
@@ -44,6 +68,7 @@ const CreateBoxMeet = ({ meet }) => {
                                     <label class="form-label" for="multicol-birthdate">لطفا تاریخ جلسه را مشخص کنید</label>
                                     <br />
                                     <DatePicker
+                                        plugins={[weekends(), <DatePickerHeader />]}
                                         className="form-control"
                                         value={date}
                                         onChange={setDate}
@@ -66,9 +91,9 @@ const CreateBoxMeet = ({ meet }) => {
                                     <br />
                                     <DatePicker
                                         disableDayPicker
-                                        format="HH:mm:ss"
+                                        format="HH:mm"
                                         plugins={[
-                                            <TimePicker />
+                                            <TimePicker hideSeconds />
                                         ]}
                                         value={time} onChange={setTime}
                                         style={{
@@ -82,7 +107,7 @@ const CreateBoxMeet = ({ meet }) => {
                                         calendar={persian}
                                         locale={persian_fa}
                                         calendarPosition="bottom-right"
-                                        placeholder="مثال :‌18 :‌00 :‌00"
+                                        placeholder="مثال :‌18:‌00"
                                     />
                                 </div>
                             </div>

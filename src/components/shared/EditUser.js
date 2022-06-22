@@ -13,7 +13,9 @@ const EditUserValidation = Yup.object().shape({
 
 
 const EditUser = ({ user }) => {
+
     const dispatch = useDispatch();
+    
     return (
         <div className="card mb-4">
             <h5 className="card-header">فرم ویرایش اطلاعات</h5>
@@ -26,6 +28,7 @@ const EditUser = ({ user }) => {
                 }}
                 validationSchema={EditUserValidation}
                 onSubmit={values => {
+                    values.id = user.id;
                     dispatch(editUserAction(values));
                 }}
             >

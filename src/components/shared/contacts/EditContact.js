@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { editUserContact } from "./../../../redux/actions/contactAction"
+import { editUserContact } from "../../../redux/actions/contactAction"
 import Swal from 'sweetalert2';
 
 const editUserValidation = Yup.object().shape({
@@ -13,7 +13,7 @@ const editUserValidation = Yup.object().shape({
 
 
 
-const EditUser = ({ editUser, setEditUser }) => {
+const EditContact = ({ editUser, setEditUser }) => {
     const [select, setSelect] = useState("");
     const { categories } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -99,4 +99,4 @@ const EditUser = ({ editUser, setEditUser }) => {
     );
 }
 
-export default EditUser;
+export default EditContact;

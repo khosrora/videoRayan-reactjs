@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import CreateBoxMeet from './createBoxMeet';
+import CreateBoxMeet from './meets/createBoxMeet';
 
 
 
 const ModelsCard = () => {
 
-    const [meet, setMeet] = useState();
+    const [meet, setMeet] = useState(2);
 
     const handleSubmit = (name) => {
         setMeet(name);
@@ -30,7 +30,7 @@ const ModelsCard = () => {
                                                                 <img class="mb-4" src="./assets/img/icons/unicons/rocket-square.png" height="48" alt="Help center articles" />
                                                                 <h5>حضوری</h5>
                                                                 <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با</p>
-                                                                <p onClick={() => handleSubmit("حضوری")} class="btn btn-label-secondary" >تایید جلسه</p>
+                                                                <button disabled onClick={() => handleSubmit("1")} class="btn btn-label-secondary" >تایید جلسه</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -41,7 +41,7 @@ const ModelsCard = () => {
                                                                 <img class="mb-4" src="./assets/img/icons/unicons/cube.png" height="48" alt="Help center articles" />
                                                                 <h5>کنفرانس</h5>
                                                                 <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</p>
-                                                                <p onClick={() => handleSubmit("کنفرانس")} class="btn btn-label-secondary" >تایید جلسه</p>
+                                                                <button onClick={() => handleSubmit("2")} class="btn btn-label-secondary" >تایید جلسه</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -52,7 +52,7 @@ const ModelsCard = () => {
                                                                 <img class="mb-4" src="./assets/img/icons/unicons/desktop.png" height="48" alt="Help center articles" />
                                                                 <h5>نوع سوم</h5>
                                                                 <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده</p>
-                                                                <p onClick={() => handleSubmit("نوع سوم")} class="btn btn-label-secondary" >تایید جلسه</p>
+                                                                <button disabled onClick={() => handleSubmit("3")} class="btn btn-label-secondary">تایید جلسه</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -67,7 +67,7 @@ const ModelsCard = () => {
                 </div>
                 {
                     meet ?
-                        <CreateBoxMeet meet={meet}/>
+                        <CreateBoxMeet meet={meet} />
                         : null
                 }
             </div>

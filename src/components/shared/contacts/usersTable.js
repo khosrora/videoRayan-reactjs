@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUser, getContacts } from '../../../redux/actions/contactAction';
 import Swal from 'sweetalert2';
+import Loader from '../loader';
 
 
-const UsersTable = ({ filter , setEditUser }) => {
+const UsersTable = ({ filter, setEditUser }) => {
 
     const { contacts, global } = useSelector(state => state);
     const users = contacts.allContacts;
@@ -39,14 +40,7 @@ const UsersTable = ({ filter , setEditUser }) => {
             <h5 className="card-header">لیست مخاطبین</h5>
             {
                 global.load ?
-                    <div className="col-12 text-center p-4">
-                        <div className="d-flex">
-                            <div class="spinner-grow" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <p>در حال دریافت اطلاعات</p>
-                        </div>
-                    </div>
+                    <Loader />
                     :
                     <div className="table-responsive text-nowrap">
                         <table className="table">
@@ -69,7 +63,7 @@ const UsersTable = ({ filter , setEditUser }) => {
                                                 <td><span className="badge bg-label-secondary">{i.semat}</span></td>
                                                 <td>
                                                     <span onClick={() => handleDelete(i.id)} className="badge bg-label-danger me-1 cursor-pointer">حذف</span>
-                                                    <span onClick={() => setEditUser(i)} className="badge bg-label-warning me-1 cursor-pointer">ویرایش</span>
+                                                    <span onClick={() => setEditUser(i)} className="badge bg-label-primary me-1 cursor-pointer">ویرایش</span>
                                                 </td>
                                             </tr>
                                             :
