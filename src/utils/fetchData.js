@@ -8,7 +8,7 @@ export const tokenUser = Cookies.get('accToken');
 export const getDataAPI = async (url, token) => {
     const res = await axios.get(`${server}/api/${url}`, {
         headers: {
-            Authorization:  token
+            Authorization: token
         }
     })
     return res;
@@ -16,7 +16,7 @@ export const getDataAPI = async (url, token) => {
 export const postDataAPI = async (url, post, token) => {
     const res = await axios.post(`${server}/api/${url}`, post, {
         headers: {
-            Authorization: token  
+            Authorization: token
         }
     })
     return res;

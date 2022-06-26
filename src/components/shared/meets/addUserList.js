@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { addMasterToMeet, addUserToMeet } from '../../../redux/actions/meetAction';
 
 
-const AddUserList = () => {
+const AddUserList = ({filter}) => {
 
     const { contacts } = useSelector(state => state);
     const users = contacts.allContacts;
@@ -48,14 +48,18 @@ const AddUserList = () => {
                     </thead>
                     <tbody className="table-border-bottom-0">
                         {
-                            users.map(i =>
-                                <tr>
-                                    <td><input className="form-check-input" type="checkbox" value="" onChange={() => handleAddUser(i.id)} /></td>
-                                    <td><span>{i.username}</span></td>
-                                    <td><span className="badge bg-label-secondary">{i.phone}</span></td>
-                                    <td><span className="badge bg-label-secondary">{i.semat}</span></td>
-                                    <td><input className="form-check-input" type="radio" name='master' onChange={() => handleAddMaster(i.id)} /></td>
-                                </tr>
+                            users.map(i => {
+                                return i.username.includes(filter) ?
+                                    <tr>
+                                        <td><input className="form-check-input" type="checkbox" value="" onChange={() => handleAddUser(i.id)} /></td>
+                                        <td><span>{i.username}</span></td>
+                                        <td><span className="badge bg-label-secondary">{i.phone}</span></td>
+                                        <td><span className="badge bg-label-secondary">{i.semat}</span></td>
+                                        <td><input className="form-check-input" type="radio" name='master' onChange={() => handleAddMaster(i.id)} /></td>
+                                    </tr>
+                                    :
+                                    null
+                            }
                             )
                         }
                     </tbody>

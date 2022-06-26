@@ -86,7 +86,7 @@ const MeetsUser = ({ filter }) => {
                                                 <td>
                                                     <i onClick={() => handleDelete(i.id)} className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
                                                     <Link to={`/add-users-meet/${i.id}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
-                                                    <a href={`https://v3.videoRayan/${i.sess_token}`} target="_blank" className='badge bg-label-warning cursor-pointer'>برو به جلسه</a>
+                                                    <a href={`https://video.videorayan.com/${i.sess_token}`} target="_blank" className='badge bg-label-warning cursor-pointer'>برو به جلسه</a>
                                                     <span className='badge bg-label-success cursor-pointer' onClick={() => handleSendSms(i.id)}>ارسال پیام</span>
                                                 </td>
                                             </tr>

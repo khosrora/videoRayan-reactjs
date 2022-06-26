@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import AddUserList from "../../components/shared/meets/addUserList";
 
 
 
 
 const AddUsersMeet = () => {
+
+    const [filter, setFilter] = useState("")
+
     return (
         <div className="content-wrapper">
             <div className="container-xxl flex-grow-1 container-p-y">
@@ -13,7 +17,7 @@ const AddUsersMeet = () => {
                         <div className="card-body">
                             <div className="row">
                                 <div>
-                                    <input type="text" className="form-control" id="defaultFormControlInput" placeholder="نام مخاطب" aria-describedby="defaultFormControlHelp" />
+                                    <input onChange={(e) => setFilter(e.target.value)} type="text" className="form-control" id="defaultFormControlInput" placeholder="نام مخاطب" aria-describedby="defaultFormControlHelp" />
                                     <div id="defaultFormControlHelp" className="form-text d-flex justify-content-between align-items-center">
                                     </div>
                                 </div>
@@ -21,7 +25,7 @@ const AddUsersMeet = () => {
                         </div>
                     </div>
                 </div>
-                <AddUserList />
+                <AddUserList filter={filter} />
             </div>
         </div>
     );

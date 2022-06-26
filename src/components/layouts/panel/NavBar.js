@@ -154,12 +154,12 @@ const NavBar = ({ setMenu, menu }) => {
                                             <div className="d-flex">
                                                 <div className="flex-shrink-0 me-3">
                                                     <div className="avatar">
-                                                        <img src="./assets/img/avatars/6.png" alt className="w-px-40 h-auto rounded-circle" />
+                                                        <img src="./assets/img/avatars/5.png" alt className="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div className="flex-grow-1">
-                                                    <h6 className="mb-1">لورم ایپسوم متن ساختگی</h6>
-                                                    <p className="mb-1">لورم ایپسوم متن ساختگی با تولید</p>
+                                                    <h6 className="mb-1">مدیریت ویدیو رایان</h6>
+                                                    <p className="mb-1">دز حال حاضر شما هیچ پیامی ندارید</p>
                                                     <small className="text-muted">5 روز قبل</small>
                                                 </div>
                                                 <div className="flex-shrink-0 dropdown-notifications-actions">
@@ -168,7 +168,7 @@ const NavBar = ({ setMenu, menu }) => {
                                                 </div>
                                             </div>
                                         </li>
-                                        <li className="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                        {/* <li className="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                             <div className="d-flex">
                                                 <div className="flex-shrink-0 me-3">
                                                     <div className="avatar">
@@ -185,7 +185,7 @@ const NavBar = ({ setMenu, menu }) => {
                                                     <a href="javascript:void(0)" className="dropdown-notifications-archive"><span className="bx bx-x"></span></a>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </li>
                                 <li className="dropdown-menu-footer border-top">
@@ -205,15 +205,14 @@ const NavBar = ({ setMenu, menu }) => {
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a className="dropdown-item" href="pages-account-settings-account.html">
-                                        <div className="d-flex">
-                                            <div className="flex-shrink-0 me-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="flex me-3">
                                                 <div className="avatar avatar-online mt-1">
                                                     <img src="./assets/img/avatars/1.png" alt className="rounded-circle" />
                                                 </div>
                                             </div>
-                                            <div className="flex-grow-1">
-                                                <span className="fw-semibold d-block">جان اسنو</span>
-                                                <small>مدیر</small>
+                                            <div className="">
+                                                <span className="fw-semibold d-block">{user.username}</span>
                                             </div>
                                         </div>
                                     </a>
@@ -221,13 +220,7 @@ const NavBar = ({ setMenu, menu }) => {
                                 <li>
                                     <div className="dropdown-divider"></div>
                                 </li>
-                                <li>
-                                    <a className="dropdown-item" href="pages-profile-user.html">
-                                        <i className="bx bx-user me-2"></i>
-                                        <span className="align-middle">پروفایل من</span>
-                                    </a>
-                                </li>
-                                <li onClick={() => dispatch(logOut())} >
+                                <li className='cursor-pointer' onClick={() => dispatch(logOut())} >
                                     <a className="dropdown-item ">
                                         <i className="bx bx-power-off me-2"></i>
                                         <span className="align-middle">خروج</span>
