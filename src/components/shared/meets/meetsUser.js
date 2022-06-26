@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteMeet, getMeets } from '../../../redux/actions/meetAction';
+import { deleteMeet, getMeets, sendSms } from '../../../redux/actions/meetAction';
 import Swal from 'sweetalert2';
 import Loader from '../loader';
 
@@ -10,12 +10,30 @@ import Loader from '../loader';
 const MeetsUser = ({ filter }) => {
 
     const { meets, global } = useSelector(state => state);
-    const sessions = meets.allMeets
+    const sessions = meets.allMeets;
+    console.log(sessions);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getMeets())
     }, []);
+
+    const handleSendSms = (id) => {
+        Swal.fire({
+            title: 'آیا مطمئن هستید ؟',
+            text: "پیامک حاوی آدرس جلسه برای کاربران ارسال خواهد شد.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'بله ارسال کن',
+            cancelButtonText: 'منصرف شدم'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                dispatch(sendSms(id));
+            }
+        });
+    }
 
     const handleDelete = id => {
         Swal.fire({
@@ -61,10 +79,15 @@ const MeetsUser = ({ filter }) => {
                                                 <td><strong>{i.name}</strong></td>
                                                 <td><span className="badge bg-label-secondary">{i.start_date}</span></td>
                                                 <td><span className="badge bg-label-secondary">{i.start_time}</span></td>
-                                                <td><span className="badge bg-label-secondary">{i.is_ended !== 0 ? "اتمام جلسه" : "لیست انتظار"}</span></td>
+                                                <td>
+                                                    <span className="badge bg-label-secondary me-1">{i.is_ended !== 0 ? "اتمام جلسه" : "در انتظار شروع"}</span>
+                                                    <span className="badge bg-label-primary cursor-pointer">شروع جلسه</span>
+                                                </td>
                                                 <td>
                                                     <i onClick={() => handleDelete(i.id)} className="align-middle fmenu-icon tf-icons bx bx-trash text-danger me-3 cursor-pointer"></i>
-                                                    <Link to={`/add-users-meet/${"1"}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
+                                                    <Link to={`/add-users-meet/${i.id}`} className="badge bg-label-secondary me-1 cursor-pointer">افزودن مخاطب</Link>
+                                                    <a href={`https://v3.videoRayan/${i.sess_token}`} target="_blank" className='badge bg-label-warning cursor-pointer'>برو به جلسه</a>
+                                                    <span className='badge bg-label-success cursor-pointer' onClick={() => handleSendSms(i.id)}>ارسال پیام</span>
                                                 </td>
                                             </tr>
                                             :

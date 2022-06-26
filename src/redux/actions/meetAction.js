@@ -33,7 +33,6 @@ export const getMeets = () => async dispatch => {
     }
 }
 
-
 export const deleteMeet = id => async dispatch => {
     try {
         dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
@@ -47,3 +46,46 @@ export const deleteMeet = id => async dispatch => {
         errorMessage("لطفا دوباره تلاش کنید");
     }
 };
+
+export const addUserToMeet = data => async dispatch => {
+    try {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
+        const res = await postDataAPI('auth/sessions/addcontact', data, token);
+        if (res.status === 200) {
+            successMessage(res.data[0]);
+        }
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+    } catch (err) {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+        errorMessage("لطفا دوباره تلاش کنید");
+    }
+}
+
+export const addMasterToMeet = data => async dispatch => {
+    try {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
+        const res = await postDataAPI('auth/sessions/setostad', data, token);
+        if (res.status === 200) {
+            successMessage(res.data[0]);
+        }
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+    } catch (err) {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+        errorMessage("لطفا دوباره تلاش کنید");
+    }
+}
+
+export const sendSms = id => async dispatch => {
+    try {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: true } });
+        const res = await postDataAPI('auth/sessions/sendmessage', { s_id: id }, token);
+        console.log(res);
+        if (res.status === 200) {
+            successMessage(res.data[0]);
+        }
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+    } catch (err) {
+        dispatch({ type: GLOBALTYPES.LOADING, payload: { load: false } });
+        errorMessage("لطفا دوباره تلاش کنید");
+    }
+}
